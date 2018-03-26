@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Streaming Video Recorder</title>
+</head>
+<link rel="stylesheet" href="../static/bootstrap_css/bootstrap.min.css"></link>
+<style>
+body {
+    background-color: #DDDDDD;
+}
+</style>
+<body>
+  <h5>Streaming Monitor</h5>
+  <div id="recorder">
+    <button id="record" type="button" class="btn btn-success btn-sm">Record</button>
+    <button id="stop" type="button" class="btn btn-danger btn-sm">Stop</button>
+    <a id="download"></a>
+    <script type="text/javascript" src="{{ url_for('static', filename='recorder.js') }}"></script>      
+  </div>
+  <img id="video" src="{{ url_for('video_viewer') }}">
+</body>
+</html>

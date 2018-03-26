@@ -1,0 +1,28 @@
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+}
+.back {
+    z-index: -3;
+    -webkit-filter: blur(6px);
+    filter: blur(6px);
+    background-image: -webkit-radial-gradient(#4682b4, #191970);
+    background-image: radial-gradient(#4682b4, #191970);
+}
+.mid {
+    z-index: -2;
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+    mix-blend-mode: lighten;
+    background: rgba(20, 20, 20, 0.5);
+}
+.front {
+    z-index: -1;
+    -webkit-filter: blur(1px);
+    filter: blur(1px);
+    mix-blend-mode: luminosity;
+}

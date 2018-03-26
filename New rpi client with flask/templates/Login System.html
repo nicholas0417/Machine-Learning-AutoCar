@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://twweeb.org/example/login-cookie/login.php -->
+<html dir="ltr" lang="zh-tw"><!--<![endif]-->
+<head>
+	<title>Login System</title>
+	<link rel="stylesheet" type="text/css" href="../static/colorful text/htmleaf-demo.css">
+	<link rel="stylesheet" type="text/css" href="../static/bubble/bubble.css">
+	
+</head>
+	<style>
+		* {
+			margin: 0px auto;
+		}
+		#login-content{
+		   text-align:center;
+		   margin:0 auto;
+		  
+		   padding:10px;
+		   width:auto;
+		   box-shadow: rgba(0,0,0,0.2), 0 6px 20px 0 );
+		}
+		
+		#login-wraper{
+			padding:0;
+			margin-top:10%;
+		}
+	</style>
+</head>
+
+{% if error %}
+	<script>var mycontent ='{{ error }}'; window.alert(mycontent);</script>
+{% endif %}
+
+<canvas class="front"></canvas>
+<canvas class="mid"></canvas>
+<canvas class="back"></canvas>
+
+<div id="login-wraper">												
+	
+	<div class="htmleaf-content">
+		<div class="content">Login</div>
+	</div>
+		
+	<div id="login-content">
+	    <form action="/valid" method="post" >
+	        <div><input id="username" type="text" size="28" name="inputUser" style="font-family:&#39;PT Mono&#39;, sans-serif;border: 1px solid rgb(120, 59, 168);margin-bottom: 15px;font-size: 107% !important;padding: 5px;height: 23px;width: 10rem;border-radius: 3px;"  placeholder="Username"></div>
+	        <div><input id="password" type="password" size="28" name="inputPassword" style="font-family:&#39;PT Mono&#39;, sans-serif;border: 1px solid rgb(120, 59, 168);margin-bottom: 15px;font-size: 107% !important;padding: 5px;height: 23px;width: 10rem;border-radius: 3px;" placeholder="Password"></div>
+			<div ><button onmouseover="detectover(this)" onmouseout="detectout(this)"type="submit" style="box-shadow:4px 5px 12px 0px black; font-size:1.2rem; font-family: &#39;PT Mono&#39; , sans-serif;border-radius: 2px;background-color: rgb(110, 50, 157);padding: 5px;background-image: -moz-linear-gradient(left center , rgb(110, 50, 157) 0%, rgb(110, 50, 157) 100%); border: 1px solid rgb(82, 38, 117);color:#FFF;  line-height: 1.88rem;  width: 10rem; "  onmousedown="mDown(this)" onmouseup="mUp(this)">Submit</button></div>
+		</form>
+	</div>
+	
+</div>
+
+<script src="../static/bubble/Vector2.min.js"></script>
+<script src="../static/bubble/bubble.js"></script>
+<script>
+        // for button
+		function mDown(obj){
+		obj.style.backgroundColor="#1ec5e5"; 
+		}
+
+		function mUp(obj){
+			obj.style.backgroundColor="#6e329d";
+			obj.style.borderColor = "#522675";
+		}
+		function detectout(obj) {
+			obj.style.backgroundColor="#6e329d";
+			obj.style.borderColor = "#522675";
+		}
+
+		function detectover(obj) {
+			obj.style.backgroundColor="#ff33ff";
+			obj.style.borderColor = "red";
+		}
+		// for generate text
+		var container = document.querySelector('.content');
+		var content = container.innerText;
+		
+		function formatContent(content, container) {
+			var contentArray = content.split(' ');
+			var formattedContent = document.createElement('div');
+			contentArray.map(function (word) {
+				formattedContent.appendChild(createWord(word));
+			});
+			console.log(contentArray);
+			container.replaceChild(formattedContent, container.firstChild);
+		};
+				
+		function createWord(characters) {
+			var word = document.createElement('div');
+			var wordArray = characters.split('');
+			wordArray.map(function (char) {
+				word.appendChild(formatCharacter(char));
+			});
+			word.appendChild(formatCharacter('&nbsp;'));
+				return word;
+			}
+
+		function formatCharacter(text) {
+			var text = text === ' ' ? '&nbsp;' : text;
+			var character = document.createElement('span');
+			character.innerHTML = text;
+			return character;
+		}
+		formatContent(content, container);
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,298 @@
+
+<html>
+
+  <head>
+	<script type="text/javascript" src="../static/socketio 1.5.1/socket.io.js"></script>
+	<link rel="stylesheet" href="../static/bootstrap_css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="../static/switch_css/style.css" /></link>
+	<link rel="stylesheet" href="../static/ios checkbox/iosCheckbox.css" /></link>
+	<link rel="stylesheet" type="text/css" href="../static/animation alert/animate.css">
+	<link rel="stylesheet" type="text/css" href="../static/animation alert/style.css">
+	
+    <meta charset="utf-8">
+		<style>
+			#loader {
+			  position: absolute;
+			  left: 50%;
+			  top: 50%;
+			  z-index: 1;
+			  
+			  margin: -75px 0 0 -75px;
+			  border: 16px solid #f3f3f3;
+			  border-radius: 50%;
+			  border-top: 16px solid #3498db;
+			  width: 120px;
+			  height: 120px;
+			  -webkit-animation: spin 2s linear infinite;
+			  animation: spin 2s linear infinite;
+			}
+
+			@-webkit-keyframes spin {
+			  0% { -webkit-transform: rotate(0deg); }
+			  100% { -webkit-transform: rotate(360deg); }
+			}
+
+			@keyframes spin {
+			  0% { transform: rotate(0deg); }
+			  100% { transform: rotate(360deg); }
+			}
+
+			  #polaroid {
+				  width: 250px;
+				  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				  text-align: center;
+			  }
+
+			  #container {
+				  padding: 10px;
+			  }
+			  #header {
+				background: -webkit-linear-gradient(top, #673ab7 35%,#673ab7 35%,#673ab7 39%,#673ab7 39%,#673ab7 39%,#673ab7 47%,#8f27ea 73%,#bd46db 100%);
+				//background-color:#673AB7;
+				//background: -webkit-linear-gradient(top, #673ab7 51%,#673ab7 51%,#673ab7 53%,#673ab7 72%,#bd46db 100%); 
+				color:white;
+				text-align:center;
+				padding:5px;
+			  }
+			  #nav {
+				line-height:40px;
+				background-color:#2196F3;
+				color : white;
+				text-align:center;
+				
+				height:610px;
+				width:150px;
+				float:left;
+				padding:5px;	      
+			  }
+			  #section {
+				width:350px;
+				float:left;
+				padding:30px;	 	 
+			  }
+			  #footer {
+				background-color:#50C878;
+				//background: -webkit-linear-gradient(top, #7db9e8 3%,#2989d8 57%,#2989d8 57%,#2989d8 57%,#2989d8 62%,#2989d8 62%);
+				color:white;
+				clear:both;
+				height:40px;
+				text-align:center;
+				padding:5px;
+				position:relative;
+			  }
+			body {margin:0;}
+
+			.topnav {
+			  overflow: hidden;
+			  background-color: #16a085;
+			}
+
+			.topnav a {
+			  float: left;
+			  display: block;
+			  color: #f2f2f2;
+			  text-align: center;
+			  padding: 14px 16px;
+			  text-decoration: none;
+			  font-size: 17px;
+			  position:relative;
+			}
+
+			.topnav a:hover {
+			  background-color: #ddd;
+			  color: black;
+			}
+
+			.topnav .icon {
+			  display: none;
+			}
+
+			@media screen and (max-width: 600px) {
+			  .topnav a:not(:first-child) {display: none;}
+			  .topnav a.icon {
+				float: right;
+				display: block;
+			  }
+			}
+
+			@media screen and (max-width: 600px) {
+			  .topnav.responsive {position: relative;}
+			  .topnav.responsive .icon {
+				position: absolute;
+				right: 0;
+				top: 0;
+			  }
+			  .topnav.responsive a {
+				float: none;
+				display: block;
+				text-align: left;
+			  }
+			}
+		</style>
+		<script src="../static/jquery 3.1.1/jquery.min.js"></script>
+		<script src="../static/animation alert/bootstrap-notify.js"></script>
+		<script src="../static/animation alert/notifications.js"></script>
+		<script src="../static/ios checkbox/iosCheckbox.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		// ios checkbox
+		$(document).ready(function(){
+			$(".ios").iosCheckbox();
+		 });
+		// myloader
+		var myVar;
+		function myLoader() {
+			myVar = setTimeout(showPage, 500);
+		}
+		function showPage() {
+		  document.getElementById("loader").style.display = "none";
+		}
+		
+		//navitop
+		function myFunction() {
+			var x = document.getElementById("myTopnav");
+			if (x.className === "topnav") {
+				x.className += " responsive";
+			} else {
+				x.className = "topnav";
+			}
+		}
+		
+		// socketio
+		var socket = io.connect();
+		
+		function webcamSwitch(cb) {
+			console.log(cb.checked);
+            socket.emit('webcam_client_event', {data: cb.checked});
+            return false;
+        };
+		function ultrasonicSwitch(cb) {
+			console.log(cb.checked);
+            socket.emit('ultrasonic_client_event', {data: cb.checked});
+            return false;
+        };
+		function logout() {
+			console.log("logout");
+            socket.emit('log_out');
+            return false;
+        };
+		
+		/*
+		$(document).ready(function() {
+			var socket = io.connect();
+		   
+			socket.on('server_response', function(msg) {
+				$('#log').append('<br>' + $('<div/>').text('Received #' + ': ' + msg.data).html());
+			});
+		});
+		*/
+		</script>
+	</head>
+  <body onload="myLoader()">
+	<div id="loader"></div>
+    <div id="header">
+      <h1>Self-driving Car Based on Computer Vision & Machine Learning</h1>
+    </div>
+    <div id="nav">
+		<div class="btn-group-vertical">
+			<button type="button" class="btn btn-primary">Webcam</button>
+			<button type="button" class="btn btn-primary">ultrasonic</button>
+			<button type="button" class="btn btn-primary">Android</button> 
+		</div>
+		<div>
+		    <br>
+			<p class="h6"> auto connect</p>
+			<input type="checkbox" class="ios" checked /><br>
+		</div>
+		<br>
+		<div>
+			<div class="jsdemo-notification-button">
+				<button type="button" class="btn btn-success btn-block waves-effect"  data-placement-from="bottom" data-placement-align="right" data-show-msg="the device is disconnected"data-animate-enter="animated flipInX" data-animate-exit="animated flipOutX"  data-color-name="alert-warning">
+					SUCCESS
+				</button>  
+			</div>
+		</div>
+    </div>
+	
+	<col>
+		<div id="section">
+			<div id="polaroid" class="rounded">
+				<img src="../static/webcam.jpg" class="rounded" alt="webcam" style="width:100%">
+				<div id="container">
+					<p><font size="3.5"><strong>Webcam</strong></font></p>
+				</div>
+			</div>
+			<p></p>
+			<form id="emit" method="POST">
+			<div class="switch demo3">
+				<input type="checkbox"  name="emit_data" id="emit_data" onchange="webcamSwitch(this);"> <!--webcam switch here-->
+				<label><i></i></label>
+			</div>
+			</form>
+			<!--
+			<form id="emit" method="POST" >
+				<input type="checkbox" name="emit_data" id="emit_data" onchange="webcamSwitch(this);"> 
+			</form>
+			-->
+		</div>
+    </col>
+	
+	<col>
+		<div id="section">
+			<div id="polaroid" class="rounded">
+				<img src="../static/ultrasonic.jpg" class="rounded" alt="ultrasonic" style="width:100%">
+				<div id="container">
+					<p><font size="3.5"><strong>Ultrasonic</strong></font></p>       
+				</div>
+			</div>
+			<p></p>
+			<form id="emit2" method="POST">
+				<div class="switch demo3">
+					<input type="checkbox" name="emit_data2" id="emit_data2" onchange="ultrasonicSwitch(this);">               <!--ultrasonic switch here-->
+					<label><i></i></label>
+				</div>
+			</form>
+		</div>
+    </col>
+	
+	<col>
+			<h1>Streaming Monitor</h1>
+				<!--
+				<div id="recorder">
+					<button id="record" type="button" class="btn btn-success btn-sm">Record</button>
+					<button id="stop" type="button" class="btn btn-danger btn-sm">Stop</button>
+					<a id="download"></a>
+					<script type="text/javascript" src="{{ url_for('static', filename='recorder.js') }}"></script>      
+				</div>
+				-->
+				<div >
+				<img style="position: absolute;" id="video" src="{{ url_for('video_viewer') }}">
+				</div>
+			<br>
+		<!--<iframe src="Video Stream.html"  height="560px;" width="365px;" frameborder="0" allowtransparency="true;" ></iframe>-->
+		
+			
+		<!--<iframe frameborder='0' noresize='noresize' style='position: absolute; background: transparent; height="560px;" width="365px;"' src="../static/Video Stream.html" frameborder="0"></iframe>
+		<!--
+		<div align="right">
+		<video id="video_containter" class="video-js vjs-default-skin" controls preload="none" width="680" height="500" poster="" data-setup="{}">
+			<source src="movie 1.mp4" type="video/mp4" />
+		</video>
+		</div>
+		-->
+	</col>
+	
+	<!--
+	<form id="emit" method="POST" >
+        <input type="text" name="emit_data" id="emit_data" placeholder="Message">
+        <input type="submit" value="Echo">
+    </form>
+	-->
+	<div id="footer">
+		<font size="3">組員:    1030303 姚之浩   1030340 張晉維   1030342 吳冠毅</font>
+    </div>
+	<div class="topnav" id="myTopnav">
+		<a href="/" onclick="logout(this);"> Sign out</a>
+		<!--<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>-->
+	</div>
+  </body>
+</html>

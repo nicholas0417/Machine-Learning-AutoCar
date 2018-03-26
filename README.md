@@ -5,17 +5,17 @@
 PC is the server which deals with the information on the image, ultrasonic measurements data by Raspberry pi and throughout using Bluetooth
 connectionless to control our remote control car.
 
-===
-## B. In Rpi(Raspberry pi) Side
+
+## B. In Rpi(Raspberry pi3) Side
 
 On the side of Raspberry Pi we get the image data on the webcam and ultrasonic measurement data and through the socket to the PC side.
 
-===
-## C. Remote Control
+
+## C. Remote Control(Arduino)
 
 The remote control circuit is connected to Arduino and is controlled by Bluetooth.
 
-===
+
 ## D. Tools
 
 Tools we need to prepare and used.
@@ -26,7 +26,7 @@ Tools we need to prepare and used.
 
 
 
-## Youtube Link :  https://youtu.be/7X3QvIdIIkQ
+### Youtube Link :  https://youtu.be/7X3QvIdIIkQ
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=7X3QvIdIIkQ
 " target="_blank"><img src="http://img.youtube.com/vi/7X3QvIdIIkQ/0.jpg"

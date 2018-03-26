@@ -27,17 +27,17 @@ Tools we need to prepare and used.
 ## E. How to use it
 
 1. in Computer side.
- a. a website page which broadcasts the image while  the Autocar was self-driving
- b. mlp/xml : the training data we trained
- c. training learning : mpl/training & mlp/predict
- d. training : collect training data
- e. ip search
+ * a website page which broadcasts the image while  the Autocar was self-driving
+ * mlp/xml : the training data we trained
+ * training learning : mpl/training & mlp/predict
+ * training : collect training data
+ * ip search
  
 2. in Raspberry pi side :
- a. New rpi client with flask
+ * New rpi client with flask
  
 3. in Arduino side :
- a. Logic bluetooth for car resistor
+ * Logic bluetooth for car resistor
 
 ### Youtube Link :  https://youtu.be/7X3QvIdIIkQ
 

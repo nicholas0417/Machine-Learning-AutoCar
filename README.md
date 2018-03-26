@@ -25,7 +25,8 @@ Tools we need to prepare and used.
 4) ANN (Collect training materials in to .npz files after prediction coexistence in xml format parameters)
 
 ## E. How to use it
-1. in Computer side :
+
+1. in Computer side.
  a. a website page which broadcasts the image while  the Autocar was self-driving
  b. mlp/xml : the training data we trained
  c. training learning : mpl/training & mlp/predict
